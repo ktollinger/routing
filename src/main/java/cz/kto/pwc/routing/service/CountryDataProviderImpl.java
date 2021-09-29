@@ -1,6 +1,9 @@
 package cz.kto.pwc.routing.service;
 
 import cz.kto.pwc.routing.model.Country;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,8 +22,12 @@ import java.util.stream.Collectors;
 @Component
 public class CountryDataProviderImpl implements CountryDataProvider {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
+    @Cacheable("countries")
     public Map<String, Country> getCountries() {
+        logger.warn("HUH: time consuming operation involved");
 
         final RestTemplate restTemplate = new RestTemplate();
         final List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();

@@ -5,6 +5,8 @@ import cz.kto.pwc.routing.exception.RouteNotFoundException;
 import cz.kto.pwc.routing.exception.RoutingException;
 import cz.kto.pwc.routing.model.Country;
 import cz.kto.pwc.routing.model.Route;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ import java.util.Queue;
 @Component
 public class RoutingServiceImpl implements RoutingService {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final CountryDataProvider countryDataProvider;
 
     @Autowired
@@ -29,7 +33,9 @@ public class RoutingServiceImpl implements RoutingService {
 
     @Override
     public Route route(final String origin, final String destination) throws RoutingException {
+        logger.info("loading countries");
         final Map<String, Country> countries = countryDataProvider.getCountries();
+        logger.info("countries loaded: {}", countries.size());
         return findRoute(countries, origin, destination);
     }
 
