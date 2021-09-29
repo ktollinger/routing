@@ -18,3 +18,10 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8085
 ```
 - application then bounds itself to the port localhost:8080
 - only published url is http://localhost:8080/routing/
+
+## Notes
+- It was not specified what route should application choose if there
+  are multiple routes with the same cost (number of border crossing).
+  Application now select the (pseudo-)random one. Pseudo- baceuse, it
+  uses HashSet as underlying collection and countries in next (tree)
+  level are processed in the order given by caa3 id hash code.
