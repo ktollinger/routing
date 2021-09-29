@@ -9,6 +9,10 @@ public class Route {
     public Route() {
     }
 
+    public Route(String... route) {
+        this.route = List.of(route);
+    }
+
     public Route(List<String> route) {
         this.route = route;
     }
