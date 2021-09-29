@@ -31,13 +31,13 @@ public class RoutingControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void routing_CZE_AUT() throws Exception {
+    public void routing_CZE_THA() throws Exception {
         final ResultActions actions = this.mockMvc
-                .perform(get("/routing/CZE/AUT").accept(APPLICATION_JSON))
+                .perform(get("/routing/CZE/THA").accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
                 .andDo(result -> System.out.println(result.getResponse().getContentAsString()))
-                .andExpect(jsonPath("$.route").value(is(List.of("CZE", "AUT"))));
+                .andExpect(jsonPath("$.route").value(is(List.of("CZE","POL","RUS","CHN","MMR","THA"))));
     }
 
 }
